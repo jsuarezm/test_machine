@@ -1,7 +1,7 @@
 data "aws_ami" "amazon_linux" {
   most_recent = true
-
-  owners = ["591542846629"]
+  owners = ["amazon"]
+  name_regex = "^al2023-ami-2023.*kernel-6.1-x86_64"
 
   filter {
     name   = "virtualization-type"
@@ -9,8 +9,12 @@ data "aws_ami" "amazon_linux" {
   }
 
   filter {
-    name = "name"
+    name   = "root-device-type"
+    values = ["ebs"]
+  }
 
-    values = ["al2023-ami-2023.*-x86_64"]
+  filter {
+    name = "architecture"
+    values = ["x86_64"]
   }
 }

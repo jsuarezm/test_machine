@@ -7,7 +7,7 @@ resource "aws_security_group" "test-sg" {
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = var.testing_ip
+    cidr_blocks = ["${var.testing_ip}"]
   }
 
   # TCP port 80 for HTTP
@@ -15,7 +15,7 @@ resource "aws_security_group" "test-sg" {
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
-    cidr_blocks = var.testing_ip
+    cidr_blocks = ["${var.testing_ip}"]
   }
 
   egress {

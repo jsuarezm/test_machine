@@ -1,10 +1,10 @@
 resource "aws_key_pair" "tester" {
   key_name   = "tester-key"
-  public_key = "file(tester_ec2_key.pub)"
+  public_key = "file(id_rsa.pub)"
 }
 
 resource "aws_instance" "test" {
-  ami                         = data.aws_ami.amazon_linux
+  ami                         = data.aws_ami.amazon_linux.id
   instance_type               = var.instance_type
   security_groups             = [aws_security_group.test-sg.id]
   subnet_id                   = aws_subnet.public.id
@@ -23,7 +23,7 @@ resource "aws_instance" "test" {
 
 output "public_ip" {
   description = "The public IP address assigned to the instance"
-  value       = "aws_instance.test.public_ip}"
+  value       = aws_instance.test.public_ip
 }
 
 
